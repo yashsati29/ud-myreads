@@ -19,7 +19,7 @@ class BooksApp extends Component {
 		});
 	}
 
-	updateShelf = (book, event) => {
+	changeShelf = (book, event) => {
 		return new Promise(resolve => {
 			BooksAPI.update(book, event.target.value).then(res => {
 				BooksAPI.getAll().then(res => {
@@ -40,7 +40,7 @@ class BooksApp extends Component {
 
 		return (
 			<div className="app">
-			<Route path="/search" render={() => <BookSearch shelvedBooks={books} onChangeShelf={this.updateShelf}/>} />
+			<Route path="/search" render={() => <BookSearch shelvedBooks={books} onChangeShelf={this.changeShelf}/>} />
 			<Route
 			exact
 			path="/"
@@ -55,19 +55,19 @@ class BooksApp extends Component {
 				key="Currently Reading"
 				shelfName="Currently Reading"
 				books={books.filter(book => book.shelf === 'currentlyReading')}
-				onChangeShelf={this.updateShelf}
+				onChangeShelf={this.changeShelf}
 				/>
 				<BookShelf
 				key="Want to Read"
 				shelfName="Want to Read"
 				books={books.filter(book => book.shelf === 'wantToRead')}
-				onChangeShelf={this.updateShelf}
+				onChangeShelf={this.changeShelf}
 				/>
 				<BookShelf
 				key="Read"
 				shelfName="Read"
 				books={books.filter(book => book.shelf === 'read')}
-				onChangeShelf={this.updateShelf}
+				onChangeShelf={this.changeShelf}
 				/>
 				</div>
 				</div>
