@@ -43,7 +43,7 @@ class BookSearch extends Component {
 
 		this.setState({ 
 			sBooks: bks,
-			isSearching: false;
+			isSearching: false
 		});
 	};
 	updateBook = books => {
