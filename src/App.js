@@ -20,11 +20,16 @@ class BooksApp extends Component {
 	}
 
 	updateShelf = (book, event) => {
-		BooksAPI.update(book, event.target.value).then(res => {
-			BooksAPI.getAll().then(res => {
-				console.log(res);
-				this.setState({
-					books: res
+		return new Promise(resolve => {
+			BooksAPI.update(book, event.target.value).then(res => {
+				BooksAPI.getAll().then(res => {
+					console.log(res)
+					this.setState(
+					{
+						books: res
+					},
+					resolve(res)
+					);
 				});
 			});
 		});
