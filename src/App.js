@@ -8,13 +8,15 @@ import './App.css';
 
 class BooksApp extends Component {
 	state = {
-		books: []
+		books: [],
+		isLoaded: false
 	};
 
 	componentDidMount() {
 		BooksAPI.getAll().then(res => {
 			this.setState({
-				books: res
+				books: res,
+				isLoaded: true
 			});
 		});
 	}
@@ -36,7 +38,7 @@ class BooksApp extends Component {
 	};
 
 	render() {
-		const { books } = this.state;
+		const { isLoaded, books } = this.state;
 
 		return (
 			<div className="app">
@@ -54,19 +56,22 @@ class BooksApp extends Component {
 				<BookShelf
 				key="Currently Reading"
 				shelfName="Currently Reading"
-				books={books.filter(book => book.shelf === 'currentlyReading')}
+				appLoaded={isLoaded}
+				fBooks={books.filter(book => book.shelf === 'currentlyReading')}
 				onChangeShelf={this.changeShelf}
 				/>
 				<BookShelf
 				key="Want to Read"
 				shelfName="Want to Read"
-				books={books.filter(book => book.shelf === 'wantToRead')}
+				appLoaded={isLoaded}
+				fBooks={books.filter(book => book.shelf === 'wantToRead')}
 				onChangeShelf={this.changeShelf}
 				/>
 				<BookShelf
 				key="Read"
 				shelfName="Read"
-				books={books.filter(book => book.shelf === 'read')}
+				appLoaded={isLoaded}
+				fBooks={books.filter(book => book.shelf === 'read')}
 				onChangeShelf={this.changeShelf}
 				/>
 				</div>

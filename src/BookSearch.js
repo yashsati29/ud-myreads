@@ -7,7 +7,8 @@ import * as BooksAPI from './BooksAPI';
 class BookSearch extends Component {
 	state = {
 		query: '',
-		sBooks: []
+		sBooks: [],
+		isSearching: false
 	};
 
 	updateQuery = event => {
@@ -18,6 +19,7 @@ class BookSearch extends Component {
 
 	searchBooks = event => {
 		if (this.state.query) {
+			this.setState({isSearching: true});
 			BooksAPI.search(this.state.query).then(res => {
 				if (res.error) {
 					this.setState({ sBooks: [] });
@@ -39,7 +41,10 @@ class BookSearch extends Component {
 			}
 		}
 
-		this.setState({ sBooks: bks });
+		this.setState({ 
+			sBooks: bks,
+			isSearching: false;
+		});
 	};
 	updateBook = books => {
 		const sBks = this.state.sBooks;
@@ -74,21 +79,25 @@ class BookSearch extends Component {
 			/>
 			</div>
 			</div>
-			<div className="search-books-results">
-			<ol className="books-grid">
-			{sBooks.map(book => (
-				<Book key={book.id} book={book} onChangeShelf={this.changeShelf} />
-				))}
-				</ol>
-				</div>
-				</div>
-				);
+			{this.state.isSearching ? (
+				<div className="loader" />
+				) : (
+				<div className="search-books-results">
+				<ol className="books-grid">
+				{sBooks.map(book => (
+					<Book key={book.id} book={book} onChangeShelf={this.changeShelf} />
+					))}
+					</ol>
+					</div>
+					)}
+					</div>
+					);
+			}
 		}
-	}
 
-	BookSearch.propTypes = {
-		shelvedBooks: PropTypes.array.isRequired,
-		onChangeShelf: PropTypes.func.isRequired
-	};
+		BookSearch.propTypes = {
+			shelvedBooks: PropTypes.array.isRequired,
+			onChangeShelf: PropTypes.func.isRequired
+		};
 
-	export default BookSearch;
+		export default BookSearch;

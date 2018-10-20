@@ -32,10 +32,16 @@ body, .app {
 
 @media (min-width: 600px) {
 	.bookshelf {
-		padding: 0 20px 40px;
+		padding: 0 20px 25px;
 	}
 }
 
+.bookshelf-status {
+	margin-top: 50px;
+	font-weight: initial;
+	font-size: 1.1em;
+	color: #b3b3b3;
+}
 .bookshelf-title {
 	border-bottom: 1px solid #dedede;
 }
@@ -53,7 +59,7 @@ body, .app {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	background: #2e7d32;
+	background: #a951ed;
 	background-image: url('./icons/add.svg');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -164,7 +170,7 @@ body, .app {
 	background-image: none;
 	pointer-events: none;
 }
-.loader {
+.book-shelf-changer-loader {
 	border-radius: 50%;
 	color: #ffffff;
 	font-size: 3px;
@@ -191,6 +197,39 @@ body, .app {
 	text-align: center;
 	font-size: 0.8em;
 }
+
+/* loader */
+.loader,
+.loader:before,
+.loader:after {
+	background: #18af82;
+	animation: loading1 1s infinite ease-in-out;
+	width: 1em;
+	height: 4em;
+}
+.loader {
+	color: #18af82;
+	text-indent: -9999em;
+	margin: 88px auto;
+	position: relative;
+	font-size: 10px;
+	transform: translateZ(0);
+	animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+	position: absolute;
+	top: 0;
+	content: '';
+}
+.loader:before {
+	left: -1.5em;
+	animation-delay: -0.32s;
+}
+.loader:after {
+	left: 1.5em;
+}
+
 
 /* loader animation */
 @keyframes loading {
@@ -226,5 +265,18 @@ body, .app {
 	87.5% {
 		box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0,
 		-3em 0em 0 0, -2em -2em 0 0.2em;
+	}
+}
+
+@keyframes loading1 {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 0;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em;
+		height: 5em;
 	}
 }

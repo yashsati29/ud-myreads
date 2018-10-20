@@ -6,18 +6,25 @@ function BookShelf(props) {
 		<div className="bookshelf">
 		<h2 className="bookshelf-title">{props.shelfName}</h2>
 		<div className="bookshelf-books">
-		<ol className="books-grid">
-		{props.books.map(book => (
-			<Book key={book.id} book={book} onChangeShelf={props.onChangeShelf} />
-			))}
-			</ol>
-			</div>
-			</div>
-			);
-}
-BookShelf.propTypes = {
-	shelfName: PropTypes.string.isRequired,
-	books: PropTypes.array.isRequired,
-	onChangeShelf: PropTypes.func.isRequired
-};
-export default BookShelf;
+		{!props.appLoaded ? (
+			<div className="loader" />
+			) : props.fBooks.length <= 0 ? (
+			<h3 className="bookshelf-status">Empty Shelf</h3>
+			) : (
+			<ol className="books-grid">
+			{props.fbooks.map(book => (
+				<Book key={book.id} book={book} onChangeShelf={props.onChangeShelf} />
+				))}
+				</ol>
+				)}
+				</div>
+				</div>
+				);
+			}
+			BookShelf.propTypes = {
+				shelfName: PropTypes.string.isRequired,
+				appLoaded: PropTypes.bool.isRequired,
+				fBooks: PropTypes.array.isRequired,
+				onChangeShelf: PropTypes.func.isRequired
+			};
+			export default BookShelf;

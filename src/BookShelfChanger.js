@@ -27,7 +27,7 @@ class BookShelfChanger extends Component {
 			<option value="read">Read</option>
 			<option value="none">None</option>
 			</select>
-			{this.state.isUpdating && <div className="loader" />}
+			{this.state.isUpdating && <div className="book-shelf-changer-loader" />}
 			</div>
 			);
 		}
