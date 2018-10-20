@@ -2,6 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 function Book(props) {
 	const { book, onChangeShelf } = props;
+
+	const thumbnail =
+	book.imageLinks === undefined
+	? 'https://dummyimage.com/128x193/333/ffffff&text=missing+image'
+	: book.imageLinks.thumbnail;
+	const authors = book.authors === undefined ? 'Unknown Author' : book.authors.join(', ');
+
 	return (
 		<li>
 		<div className="book">
@@ -11,7 +18,7 @@ function Book(props) {
 		style={{
 			width: 128,
 			height: 193,
-			backgroundImage: `url(${book.imageLinks.thumbnail})`
+			backgroundImage: `url(${thumbnail})`
 		}}
 		/>
 		<div className="book-shelf-changer">
@@ -32,7 +39,7 @@ function Book(props) {
 		</div>
 		</div>
 		<div className="book-title">{book.title}</div>
-		<div className="book-authors">{book.authors.join(', ')}</div>
+		<div className="book-authors">{authors}</div>
 		</div>
 		</li>
 		);
